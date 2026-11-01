@@ -1,0 +1,15 @@
+listen: 0.0.0.0:4222
+jetstream {
+  store_dir: /tmp/js
+}
+authorization {
+  users = [
+    { user: kipchak, password: kipchak-password }
+    { nkey: NKEY_PUBLIC }
+    {
+      user: limited
+      password: limited-password
+      permissions: { publish: { allow: ["allowed.>", "_INBOX.>"] }, subscribe: { allow: ["allowed.>", "_INBOX.>"] } }
+    }
+  ]
+}

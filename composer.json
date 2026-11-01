@@ -1,0 +1,46 @@
+{
+    "name": "kipchak/driver-nats",
+    "type": "library",
+    "description": "A NATS and JetStream driver for messaging, request/reply, durable streams and key-value buckets from the Kipchak API Development Kit (ADK)",
+    "keywords": [
+        "APIs",
+        "NATS",
+        "JetStream",
+        "Messaging",
+        "Queue",
+        "Key-Value",
+        "Microservices",
+        "Mamluk"
+    ],
+    "homepage": "https://mamluk.net",
+    "license": "MIT",
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Kipchak\\Driver\\NATS\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Kipchak\\Driver\\NATS\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=8.4",
+        "basis-company/nats": "^1.2.5",
+        "kipchak/core": "^2 || ^3",
+        "kipchak/driver-config": "^1",
+        "psr/log": "^2 || ^3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^12"
+    },
+    "suggest": {
+        "ext-sodium": "For NKey and credentials-file (JWT) authentication",
+        "paragonie/sodium_compat": "For NKey and credentials-file (JWT) authentication without ext-sodium"
+    }
+}

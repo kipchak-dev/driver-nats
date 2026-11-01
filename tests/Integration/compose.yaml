@@ -1,0 +1,39 @@
+# NATS for the integration tests (certificates and the NKey user from start-services.sh):
+# 54222 plain, 54223 user/password, token-free NKey user, 54224 TLS, 54225 mutual TLS. All run JetStream.
+name: kipchak-nats-tests
+
+services:
+  nats:
+    image: nats:2.12-alpine
+    command: ["-js", "-sd", "/data", "-m", "8222"]
+    ports:
+      - "54222:4222"
+      - "58222:8222"
+    tmpfs:
+      - /data
+
+  nats-auth:
+    image: nats:2.12-alpine
+    command: ["-c", "/etc/nats/auth.conf"]
+    ports:
+      - "54223:4222"
+    volumes:
+      - ./.certs/auth.conf:/etc/nats/auth.conf:ro
+
+  nats-tls:
+    image: nats:2.12-alpine
+    command: ["-c", "/etc/nats/tls.conf"]
+    ports:
+      - "54224:4222"
+    volumes:
+      - ./nats/tls.conf:/etc/nats/tls.conf:ro
+      - ./.certs:/etc/nats/certs:ro
+
+  nats-mtls:
+    image: nats:2.12-alpine
+    command: ["-c", "/etc/nats/mtls.conf"]
+    ports:
+      - "54225:4222"
+    volumes:
+      - ./nats/mtls.conf:/etc/nats/mtls.conf:ro
+      - ./.certs:/etc/nats/certs:ro
