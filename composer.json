@@ -42,5 +42,19 @@
     "suggest": {
         "ext-sodium": "For NKey and credentials-file (JWT) authentication",
         "paragonie/sodium_compat": "For NKey and credentials-file (JWT) authentication without ext-sodium"
+    },
+    "extra": {
+        "kipchak": {
+            "type": "driver",
+            "config": "sample.config.php",
+            "configName": "kipchak.nats.php",
+            "initialise": "\\Kipchak\\Driver\\NATS\\NATS::initialise($container);",
+            "after": [
+                "kipchak/driver-config",
+                "kipchak/driver-logger"
+            ],
+            "before": [],
+            "docs": "https://kipchak.dev/docs/driver-nats"
+        }
     }
 }
